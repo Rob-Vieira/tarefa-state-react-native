@@ -9,11 +9,12 @@ import Task from "../components/Task";
 import AddTask from "../components/AddTask";
 import Theme from "../Theme";
 import { useState } from "react";
+import { useTaskContext } from "../contexts/TasksContext";
 
 export default function Tasks({ navigation }) {
-  const [tasks, setTasks] = useState([]);
+  const {globalTasksData, setGlobalTasksData} = useTaskContext();
 
-  const cloneTasks = () => tasks.map((t) => t);
+  const cloneTasks = () => globalTasksData.map((t) => t);
 
   const newTask = (text) => {
     if (text == "") return false;
@@ -23,9 +24,10 @@ export default function Tasks({ navigation }) {
     newTasks.push({
       text: text,
       checked: false,
+      detail: 'Texto de teste só para encher mesmo.'
     });
 
-    setTasks(newTasks);
+    setGlobalTasksData(newTasks);
   };
 
   const removeTask = (index) => {
@@ -33,7 +35,7 @@ export default function Tasks({ navigation }) {
 
     newTasks.splice(index, 1);
 
-    setTasks(newTasks);
+    setGlobalTasksData(newTasks);
   };
 
   const checkTask = (index) => {
@@ -41,7 +43,7 @@ export default function Tasks({ navigation }) {
 
     newTasks[index].checked = !newTasks[index].checked;
 
-    setTasks(newTasks);
+    setGlobalTasksData(newTasks);
   };
 
   return (
@@ -51,47 +53,28 @@ export default function Tasks({ navigation }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.list}
       >
-        {tasks.map((t, i) => (
+        {globalTasksData.map((t, i) => (
           <Task
             key={i + "_task"}
             text={t.text}
             checked={t.checked}
             remPress={() => removeTask(i)}
             checkPress={() => checkTask(i)}
+            showDetailPress={() => navigation.navigate({name: 'TaskDetail', params: { id: i }})}
           />
         ))}
       </ScrollView>
-      <TouchableOpacity
-        style={{
-          height: 80,
-          backgroundColor: Theme.primary,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 4,
-        }}
-        onPress={() => navigation.navigate('Contador')}
-      >
-        <Text
-          style={{ 
-            color: Theme.primaryText, 
-            fontSize: 32, 
-            fontWeight: "bold" 
-          }}
-        >
-          Contador
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // width: "100%",
     padding: 15,
     paddingBottom: 25,
     gap: 25,
     flex: 1,
+    backgroundColor: Theme.bg
   },
   list: {
     flexGrow: 1,

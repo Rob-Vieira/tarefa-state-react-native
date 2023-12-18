@@ -1,11 +1,11 @@
 // Tema: Ameralo escuro
-// export default {
-//     primary: '#FCA311',
-//     bg: '#14213D',
-//     bgSecondary: '#000000',
-//     text: '#E5E5E5',
-//     primaryText: '#FFFFFF'
-// };
+export default {
+    primary: '#FCA311',
+    bg: '#14213D',
+    bgSecondary: '#000000',
+    text: '#E5E5E5',
+    primaryText: '#FFFFFF'
+};
 
 // Tema: Laranja escuro
 // export default {
@@ -71,13 +71,13 @@
 // };
 
 // Tema: Azul que ela gostou
-export default {
-    primary: '#0c7489',
-    bg: '#040404',
-    bgSecondary: '#13505b',
-    text: '#d7d9ce',
-    primaryText: '#d7d9ce'
-};
+// export default {
+//     primary: '#0c7489',
+//     bg: '#040404',
+//     bgSecondary: '#13505b',
+//     text: '#d7d9ce',
+//     primaryText: '#d7d9ce'
+// };
 
 // Tema: Rosa escuro
 // export default {

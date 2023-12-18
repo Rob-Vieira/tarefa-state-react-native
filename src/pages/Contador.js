@@ -21,28 +21,6 @@ export default function Contador({ navigation }) {
           <Text style={styles.btnText}>Remover</Text>
         </TouchableOpacity>
       </View>
-      
-      <TouchableOpacity
-        style={{
-          height: 80,
-          backgroundColor: Theme.primary,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 4,
-          paddingHorizontal: 20
-        }}
-        onPress={() => navigation.navigate('Contador')}
-      >
-        <Text
-          style={{ 
-            color: Theme.primaryText, 
-            fontSize: 32, 
-            fontWeight: "bold" 
-          }}
-        >
-          Contador
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -52,7 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    gap: 60
+    gap: 60,
+    backgroundColor: Theme.bg
   },
   btnCont: {
     flexDirection: "row",

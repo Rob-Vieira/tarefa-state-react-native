@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import Theme from "../Theme";
 import { useState } from "react";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 export default function AddTask({addPress = ()=>{}}) {
   const [text, setText] = useState("");
@@ -25,7 +26,7 @@ export default function AddTask({addPress = ()=>{}}) {
         style={styles.input}
       />
       <TouchableOpacity onPress={() => { setText(''); addPress(text); }} style={styles.btn}>
-        <Text style={styles.btnText}>+</Text>
+        <FontAwesome5 name="plus" size={40} color={Theme.primaryText} />
       </TouchableOpacity>
     </View>
   );

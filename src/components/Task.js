@@ -3,40 +3,41 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import Theme from "../Theme";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
-export default function Task({ checked = false, text = '', checkPress, remPress }) {
+export default function Task({ checked = false, text = '', checkPress, remPress, showDetailPress }) {
   return (
-    <View style={[styles.container, checked && styles.containerChecked]}>
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 1 }}
-      >
-        <Text style={[styles.text, checked && styles.textChecked]}>
-          {text}
-        </Text>
-      </ScrollView>
-      <View style={styles.btns}>
-        <TouchableOpacity onPress={checkPress} style={styles.btn}>
-          {/* <Text style={styles.btnText}>✔️</Text> */}
-          <Text style={styles.btnText}>O</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={remPress} style={styles.btn}>
-          {/* <Text style={styles.btnText}>✖️</Text> */}
-          <Text style={styles.btnText}>X</Text>
-        </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={checkPress}>
+      <View style={[styles.container, checked && styles.containerChecked]}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={{ flexGrow: 1 }}
+        >
+          <Text style={[styles.text, checked && styles.textChecked]}>
+            {text}
+          </Text>
+        </ScrollView>
+        <View style={styles.btns}>
+          <TouchableOpacity onPress={showDetailPress} style={styles.btn}>
+            <FontAwesome5 name="eye" size={18} color={Theme.primaryText} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={remPress} style={styles.btn}>
+            <FontAwesome5 name="trash-alt" size={18} color={Theme.primaryText} />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: 80,
-    // width: '100%',
     backgroundColor: Theme.bgSecondary,
     borderRadius: 4,
     justifyContent: "space-between",
