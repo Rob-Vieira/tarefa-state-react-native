@@ -19,40 +19,68 @@ export default function TaskDetail({ navigation, route }) {
 
   const [detail, setDetail] = useState(globalTasksData[id].detail);
   const [canEdit, setCanEdit] = useState(false);
+  const [text, setText] = useState(globalTasksData[id].text);
+
+  const handleText = (newText) => {
+    setText(newText);
+  }
 
   const cloneTasks = () => globalTasksData.map((t) => t);
 
+  const editTask = () => {
+    let newTasks = cloneTasks();
+
+    newTasks[id].detail = detail;
+    newTasks[id].text = text;
+
+    setGlobalTasksData(newTasks);
+    setCanEdit(false);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title} >{globalTasksData[id].text}</Text>
-
       {
-        canEdit ?
+        !canEdit ?
           (
             <>
+              <Text style={styles.title} >{globalTasksData[id].text}</Text>
               <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.list}
               >
                 <Text style={styles.text} >{globalTasksData[id].detail}</Text>
               </ScrollView>
-              <TouchableOpacity style={styles.editBtn}>
+              <TouchableOpacity onPress={() => setCanEdit(true)} style={styles.editBtn}>
                 <AntDesign name="edit" size={24} color={Theme.primaryText} />
               </TouchableOpacity>
             </>
           ):
           (
             <>
+              <Text style={styles.label}>Título:</Text>
+              <TextInput
+                placeholder="Título da tarefa..."
+                placeholderTextColor={Theme.text}
+                value={text}
+                onChangeText={handleText}
+                style={styles.input}
+              />
+              <Text style={styles.label}>Descrição:</Text>
               <TextInput 
                 style={styles.textInput}
                 multiline
-                numberOfLines={4} // Defina o número desejado de linhas visíveis inicialmente
+                //numberOfLines={4} // Defina o número desejado de linhas visíveis inicialmente
                 placeholder="Digite seu texto aqui..."
                 value={detail}
                 onChangeText={(newText) => setDetail(newText)}
+                placeholderTextColor={Theme.text}
+                textAlignVertical="top"
               />
-              <TouchableOpacity style={styles.btn}>
+              <TouchableOpacity onPress={ editTask } style={styles.btn}>
                 <Text style={styles.btnText}>Salvar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={ () => setCanEdit(false) } style={styles.btnG}>
+                <Text style={styles.btnGText}>Cancelar</Text>
               </TouchableOpacity>
             </>
           )
@@ -71,9 +99,21 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.bg,
     position: 'relative'
   },
+  label: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Theme.text
+  },
+  input: {
+    backgroundColor: Theme.bgSecondary,
+    color: Theme.text,
+    padding: 15,
+    borderRadius: 4
+  },
   list: {
     flexGrow: 1,
     gap: 20,
+    paddingBottom: 70
   },
   title: {
     fontSize: 32,
@@ -103,6 +143,25 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   btnText: {
+    textAlign: 'center',
     color: Theme.primaryText,
   },
+  btnG: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: Theme.primary
+  },
+  btnGText: {
+    textAlign: 'center',
+    color: Theme.primary,
+  },
+  textInput: {
+    backgroundColor: Theme.bgSecondary,
+    borderRadius: 4,
+    color: Theme.text,
+    padding: 15,
+    flex: 1
+  }
 });

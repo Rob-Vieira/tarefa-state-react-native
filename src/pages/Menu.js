@@ -4,6 +4,10 @@ import Theme from "../Theme";
 export default function Menu({ navigation }) {
     return (
         <View style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.title}>Lista de exercícios</Text>
+                <Text style={styles.subtitle}>Tarefas idealizadas usando o ChatGPT, com o intutito de melhor compreensão e pratica do uso dos 'States' no react native.</Text>
+            </View>
             <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.navigate('Contador')}
@@ -27,10 +31,26 @@ export default function Menu({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 60,
+        padding: 15,
+        gap: 25,
         backgroundColor: Theme.bg
+    },
+    header: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: Theme.bgSecondary,
+        padding: 15,
+        borderRadius: 4,
+        marginBottom: 10
+    },
+    title: {
+        fontSize: 32,
+        color: Theme.primaryText,
+        fontWeight: 'bold'
+    },
+    subtitle: {
+        color: Theme.text,
+        marginTop: 10
     },
     btnCont: {
         flexDirection: "row",
