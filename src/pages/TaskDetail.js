@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     color: Theme.text,
     padding: 15,
-    flex: 1
+    flex: 1,
+    minHeight: 100
   }
 });

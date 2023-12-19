@@ -1,17 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Theme from "../Theme";
 import { useState } from "react";
+import { useContadorContext } from "../contexts/ContadorContext";
 
 export default function Contador({ navigation }) {
-    const [cont, setCont] = useState(0);
+    const {contadorData, setContadorData} = useContadorContext();
 
-    const addCont = () => setCont(cont + 1);
-    const remCont = () => setCont(cont - 1);
+    const addCont = () => setContadorData(contadorData + 1);
+    const remCont = () => setContadorData(contadorData - 1);
 
   return (
     <View style={styles.container}>
       <View style={styles.textCont}>
-        <Text style={styles.text}>{cont}</Text>
+        <Text style={styles.text}>{contadorData}</Text>
       </View>
       <View style={styles.btnCont}>
         <TouchableOpacity onPress={addCont} style={styles.btn}>

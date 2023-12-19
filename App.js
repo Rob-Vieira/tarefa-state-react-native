@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, StatusBar as StatusBarRN, Dimensions } from "re
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import { TasksProvider } from "./src/contexts/TasksContext";
+import { ContadorProvider } from "./src/contexts/ContadorContext";
 
 import Contador from "./src/pages/Contador";
 import Theme from "./src/Theme";
@@ -16,15 +18,17 @@ export default function App() {
 
   return (
     <TasksProvider>
-      <NavigationContainer style={styles.container}>
-        <StatusBar style="light" />
-        <Stack.Navigator initialRouteName="Menu" screenOptions={screenOptions}>
-          <Stack.Screen options={{ title: 'Home' }} name="Menu" component={Menu} />
-          <Stack.Screen options={{ title: 'Clique até o fim' }} name="Contador" component={Contador} />
-          <Stack.Screen options={{ title: 'Se organiza aí' }} name="Tasks" component={Tasks} />
-          <Stack.Screen options={{ title: 'Se organiza aí' }} name="TaskDetail" component={TaskDetail} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ContadorProvider>
+        <NavigationContainer style={styles.container}>
+          <StatusBar style="light" />
+          <Stack.Navigator initialRouteName="Menu" screenOptions={screenOptions}>
+            <Stack.Screen options={{ title: 'Home' }} name="Menu" component={Menu} />
+            <Stack.Screen options={{ title: 'Clique até o fim' }} name="Contador" component={Contador} />
+            <Stack.Screen options={{ title: 'Se organiza aí' }} name="Tasks" component={Tasks} />
+            <Stack.Screen options={{ title: 'Se organiza aí' }} name="TaskDetail" component={TaskDetail} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ContadorProvider>
     </TasksProvider>
   );
 }

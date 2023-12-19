@@ -6,7 +6,7 @@ export default function Menu({ navigation }) {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Lista de exercícios</Text>
-                <Text style={styles.subtitle}>Tarefas idealizadas usando o ChatGPT, com o intutito de melhor compreensão e pratica do uso dos 'States' no react native.</Text>
+                <Text style={styles.subtitle}>Tarefas elaboradas pelo ChatGPT com o propósito de proporcionar prática e aprimoramento no uso de 'States' no desenvolvimento com React Native. É importante ressaltar que utilizei a inteligência artificial apenas para esclarecimento de dúvidas gerais e para a criação da lista de tarefas.</Text>
             </View>
             <TouchableOpacity
                 style={styles.btn}
@@ -50,7 +50,9 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         color: Theme.text,
-        marginTop: 10
+        marginTop: 10,
+        textAlign: 'justify',
+        fontSize: 16
     },
     btnCont: {
         flexDirection: "row",
