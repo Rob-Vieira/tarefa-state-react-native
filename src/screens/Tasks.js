@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Task from "../components/Task";
 import AddTask from "../components/AddTask";
-import Theme from "../Theme";
+import Theme from "../theme/Theme";
 import { useState } from "react";
 import { useTaskContext } from "../contexts/TasksContext";
 

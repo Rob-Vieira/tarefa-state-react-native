@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Theme from "../Theme";
+import Theme from "../theme/Theme";
 import { useState } from "react";
 import { useContadorContext } from "../contexts/ContadorContext";
 

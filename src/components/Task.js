@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import Theme from "../Theme";
+import Theme from "../theme/Theme";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
 export default function Task({ checked = false, text = '', checkPress, remPress, showDetailPress }) {

@@ -6,12 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Task from "../components/Task";
-import AddTask from "../components/AddTask";
-import Theme from "../Theme";
+import Theme from "../theme/Theme";
 import { useState } from "react";
 import { useTaskContext } from "../contexts/TasksContext";
 import { AntDesign } from '@expo/vector-icons';
+import Styles from "../theme/Styles";
 
 export default function TaskDetail({ navigation, route }) {
   const { globalTasksData, setGlobalTasksData } = useTaskContext();
@@ -38,36 +37,38 @@ export default function TaskDetail({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[Styles.container, {position: 'relative'}]}>
       {
         !canEdit ?
           (
             <>
-              <Text style={styles.title} >{globalTasksData[id].text}</Text>
+              <Text style={Styles.title} >{globalTasksData[id].text}</Text>
               <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.list}
+                contentContainerStyle={Styles.list}
               >
-                <Text style={styles.text} >{globalTasksData[id].detail}</Text>
+                <View style={Styles.card}>
+                  <Text style={Styles.text} >{globalTasksData[id].detail}</Text>
+                </View>
               </ScrollView>
               <TouchableOpacity onPress={() => setCanEdit(true)} style={styles.editBtn}>
                 <AntDesign name="edit" size={24} color={Theme.primaryText} />
               </TouchableOpacity>
             </>
-          ):
+          ) :
           (
             <>
-              <Text style={styles.label}>Título:</Text>
+              <Text style={Styles.label}>Título:</Text>
               <TextInput
                 placeholder="Título da tarefa..."
                 placeholderTextColor={Theme.text}
                 value={text}
                 onChangeText={handleText}
-                style={styles.input}
+                style={Styles.input}
               />
-              <Text style={styles.label}>Descrição:</Text>
-              <TextInput 
-                style={styles.textInput}
+              <Text style={Styles.label}>Descrição:</Text>
+              <TextInput
+                style={Styles.textInput}
                 multiline
                 //numberOfLines={4} // Defina o número desejado de linhas visíveis inicialmente
                 placeholder="Digite seu texto aqui..."
@@ -76,53 +77,21 @@ export default function TaskDetail({ navigation, route }) {
                 placeholderTextColor={Theme.text}
                 textAlignVertical="top"
               />
-              <TouchableOpacity onPress={ editTask } style={styles.btn}>
-                <Text style={styles.btnText}>Salvar</Text>
+              <TouchableOpacity onPress={editTask} style={Styles.btn}>
+                <Text style={Styles.btnText}>Salvar</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={ () => setCanEdit(false) } style={styles.btnG}>
-                <Text style={styles.btnGText}>Cancelar</Text>
+              <TouchableOpacity onPress={() => setCanEdit(false)} style={Styles.btnG}>
+                <Text style={Styles.btnGText}>Cancelar</Text>
               </TouchableOpacity>
             </>
           )
-        
+
       }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    paddingBottom: 25,
-    gap: 25,
-    flex: 1,
-    backgroundColor: Theme.bg,
-    position: 'relative'
-  },
-  label: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: Theme.text
-  },
-  input: {
-    backgroundColor: Theme.bgSecondary,
-    color: Theme.text,
-    padding: 15,
-    borderRadius: 4
-  },
-  list: {
-    flexGrow: 1,
-    gap: 20,
-    paddingBottom: 70
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: Theme.text
-  },
-  text: {
-    color: Theme.text
-  },
   editBtn: {
     position: 'absolute',
     bottom: 15,
@@ -135,34 +104,5 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.primary,
     borderWidth: 2,
     borderColor: Theme.primary + '70'
-  },
-  btn: {
-    backgroundColor: Theme.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-  },
-  btnText: {
-    textAlign: 'center',
-    color: Theme.primaryText,
-  },
-  btnG: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: Theme.primary
-  },
-  btnGText: {
-    textAlign: 'center',
-    color: Theme.primary,
-  },
-  textInput: {
-    backgroundColor: Theme.bgSecondary,
-    borderRadius: 4,
-    color: Theme.text,
-    padding: 15,
-    flex: 1,
-    minHeight: 100
   }
 });
