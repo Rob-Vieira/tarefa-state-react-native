@@ -40,7 +40,7 @@ export default function Cadastrados({ navigation, route }){
         <View style={Styles.container}>
             <ScrollView contentContainerStyle={Styles.list}>
                 <Text style={Styles.title}>Ultimo usuário cadastrado</Text>
-                <View style={styles.card}>
+                <View style={Styles.card}>
                     <Text style={Styles.text}><Text style={Styles.highlightedText} >id: </Text> { lastUser._id } </Text>
                     <Text style={Styles.text}><Text style={Styles.highlightedText} >Nome: </Text> { lastUser.name } </Text>
                     <Text style={Styles.text}><Text style={Styles.highlightedText} >E-mail: </Text> { lastUser.email } </Text>
@@ -50,7 +50,7 @@ export default function Cadastrados({ navigation, route }){
                 <Text style={Styles.title}>Todos os usuários</Text>
                 {
                     users.map(user => (
-                        <View key={ user._id } style={styles.card}>
+                        <View key={ user._id } style={Styles.card}>
                             <Text style={Styles.text}><Text style={Styles.highlightedText} >id: </Text>{ user._id } </Text>
                             <Text style={Styles.text}><Text style={Styles.highlightedText} >Nome: </Text>{ user.name } </Text>
                             <Text style={Styles.text}><Text style={Styles.highlightedText} >E-mail: </Text>{ user.email } </Text>
